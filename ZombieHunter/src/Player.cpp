@@ -47,10 +47,17 @@ void Player::moveController()
 		speed = walkSpeed;
 	}
 
-	if (IsKeyDown(KEY_W)) position.y -= speed;
-	if (IsKeyDown(KEY_A)) position.x -= speed;
-	if (IsKeyDown(KEY_S)) position.y += speed;
-	if (IsKeyDown(KEY_D)) position.x += speed;
+	if (IsKeyDown(KEY_W) || IsKeyDown(KEY_UP)) 
+		position.y -= speed;
+
+	if (IsKeyDown(KEY_A) || IsKeyDown(KEY_LEFT)) 
+		position.x -= speed;
+
+	if (IsKeyDown(KEY_S) || IsKeyDown(KEY_DOWN)) 
+		position.y += speed;
+
+	if (IsKeyDown(KEY_D) || IsKeyDown(KEY_RIGHT)) 
+		position.x += speed;
 }
 
 void Player::start()

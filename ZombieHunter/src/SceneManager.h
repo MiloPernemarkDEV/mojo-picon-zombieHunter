@@ -13,7 +13,7 @@
 struct SceneManager {
 public:
 	void start();
-	void update();
+	void update(float deltaTime);
 private:
 	std::vector<SauceMaker*> sauces;
 	Player m_Player;

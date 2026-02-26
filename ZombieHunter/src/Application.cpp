@@ -27,22 +27,22 @@ void Application::end() {
 }
 
 
-void Application::gameLoop() {
+	void Application::gameLoop() {
 
-	m_sceneManager.start();
+		m_sceneManager.start();
 
-	while (!WindowShouldClose()) 
-	{
-		PollInputEvents();
-		BeginDrawing();
-		ClearBackground(BACKGROUND_COLOR);
+		while (!WindowShouldClose()) 
+		{
+			PollInputEvents();
+			BeginDrawing();
+			ClearBackground(BACKGROUND_COLOR);
 
-		m_sceneManager.update();
+			m_sceneManager.update(GetFrameTime());
 	
 
-		EndDrawing();
-	}
+			EndDrawing();
+		}
 
-	CloseWindow();
-}
+		CloseWindow();
+	}
 

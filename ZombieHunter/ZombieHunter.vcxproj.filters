@@ -27,7 +27,6 @@
     <ClCompile Include="src\SceneManager.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="SRC\PLAYER (2).CPP" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Application.h">

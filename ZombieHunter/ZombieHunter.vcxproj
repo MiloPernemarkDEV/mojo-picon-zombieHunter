@@ -14,7 +14,6 @@
     <ClCompile Include="src\Application.cpp" />
     <ClCompile Include="src\Entry.cpp" />
     <ClCompile Include="src\FrameTool.cpp" />
-    <ClCompile Include="SRC\PLAYER (2).CPP" />
     <ClCompile Include="src\Player.cpp" />
     <ClCompile Include="src\SauceMaker.cpp" />
     <ClCompile Include="src\SceneManager.cpp" />

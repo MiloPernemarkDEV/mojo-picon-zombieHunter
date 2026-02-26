@@ -1,13 +1,15 @@
 #include "SceneManager.h"
 
 void SceneManager::start() {
+
+	addSauce();
+
 	for (i32 i = 0; i < sauces.size(); i++) {
 		sauces[i]->start();
 	}
 }
 
-void SceneManager::update() {
-	float deltaTime = GetFrameTime();
+void SceneManager::update(float deltaTime) {
 
 	m_Sheep.m_playerPos = m_Player.getPlayerPosition();
 
