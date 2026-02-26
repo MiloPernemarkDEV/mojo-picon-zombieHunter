@@ -39,7 +39,6 @@ public:
 
 	Vector2 m_playerPos;
 private:
-	// 32 bytes * 4
 	std::vector<Vector2> m_sheepPositions;
 	std::vector<Vector2> m_sheepDirections;
 	std::vector<SheepStates> m_sheepStates;
