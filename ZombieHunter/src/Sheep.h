@@ -11,7 +11,7 @@
 #include "MojoPiconMath.h"
 
 
-const i32 START_SHEEP_COUNT{10};
+const i32 START_SHEEP_COUNT{20};
 const i32 MAX_SHEEP_COUNT{20};
 const float MAX_DISTANCE_TO_PLAYER{300};
 
@@ -31,12 +31,17 @@ public:
 	void moveSheep();
 	void start() override;
 	Vector2 m_playerPos;
-	SheepStates randomStateDecider(i32 index);
+	SheepStates stateMachine(i32 index, float deltaTime);
+	Vector2 fleeDirection(i32 i);
 private:
 	std::vector<Vector2> m_sheepPositions;
 	std::vector<Vector2> m_sheepDirections;
+	std::vector<SheepStates> m_sheepStates;
+	std::vector<float> m_sheepStateTimers;
+
 	Texture2D m_texture;
 	MojoPiconMath m_math;
-	i32 m_speed;
+	i32 m_fleeSpeed;
+	i32 m_wanderSpeed;
 	i32 m_currentSheepCount;
 };
