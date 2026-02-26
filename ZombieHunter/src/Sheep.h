@@ -11,7 +11,7 @@
 #include "MojoPiconMath.h"
 
 
-const i32 START_SHEEP_COUNT{20};
+const i32 START_SHEEP_COUNT{15};
 const i32 MAX_SHEEP_COUNT{20};
 const float MAX_DISTANCE_TO_PLAYER{300};
 

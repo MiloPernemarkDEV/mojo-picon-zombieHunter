@@ -62,7 +62,12 @@ void Sheep::start()
     m_texture = LoadTexture(SFP::SHEEP_PNG);
     SetTextureFilter(m_texture, TEXTURE_FILTER_POINT);
 
-    m_currentSheepCount = START_SHEEP_COUNT;
+    if (START_SHEEP_COUNT > MAX_SHEEP_COUNT) {
+        m_currentSheepCount = MAX_SHEEP_COUNT;
+    }
+    else {
+        m_currentSheepCount = START_SHEEP_COUNT;
+    }
 
     m_sheepPositions.resize(m_currentSheepCount);
     m_sheepDirections.resize(m_currentSheepCount);
