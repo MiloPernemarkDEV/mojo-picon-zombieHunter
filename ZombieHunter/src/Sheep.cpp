@@ -98,32 +98,32 @@ void Sheep::start()
     }
 }
 
-SheepStates Sheep::stateMachine(i32 index, float deltaTime)
+SheepStates Sheep::stateMachine(i32 i, float deltaTime)
 {
     float maxDistSquared = MAX_DISTANCE_TO_PLAYER * MAX_DISTANCE_TO_PLAYER * static_cast<float>(GetRandomValue(0, 1));
-    float distance = m_math.squaredDistance(m_sheepPositions[index], m_playerPos);
+    float distance = m_math.squaredDistance(m_sheepPositions[i], m_playerPos);
 
     if (distance <= maxDistSquared)
     {
-        m_sheepStates[index] = SheepStates::FLEEING;
-        m_sheepStateTimers[index] = 0.5f; 
-        return m_sheepStates[index];
+        m_sheepStates[i] = SheepStates::FLEEING;
+        m_sheepStateTimers[i] = 0.5f; 
+        return m_sheepStates[i];
     }
 
-    m_sheepStateTimers[index] -= deltaTime;
-    if (m_sheepStateTimers[index] <= 0.0f)
+    m_sheepStateTimers[i] -= deltaTime;
+    if (m_sheepStateTimers[i] <= 0.0f)
     {
         i32 randomTicket = GetRandomValue(0, 2000);
         i32 middleValue = 1000;
         if (randomTicket <= middleValue)
-            m_sheepStates[index] = SheepStates::IDLE;
+            m_sheepStates[i] = SheepStates::IDLE;
         else
-            m_sheepStates[index] = SheepStates::GRAZING;
+            m_sheepStates[i] = SheepStates::GRAZING;
 
-        m_sheepStateTimers[index] = static_cast<float>(GetRandomValue(1, 5));
+        m_sheepStateTimers[i] = static_cast<float>(GetRandomValue(1, 5));
     }
 
-    return m_sheepStates[index];
+    return m_sheepStates[i];
 }
 
 Vector2 Sheep::fleeDirection(i32 i)
