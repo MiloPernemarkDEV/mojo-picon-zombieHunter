@@ -11,7 +11,7 @@ public:
 	~Player();
 	void update(float deltaTime) override;
 	void drawSprite() override;
-	void moveController();
+	void playerInput();
 	void start() override;
 	
 	Vector2 getPlayerPosition();

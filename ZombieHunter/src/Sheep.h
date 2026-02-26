@@ -15,6 +15,12 @@ const i32 START_SHEEP_COUNT{10};
 const i32 MAX_SHEEP_COUNT{20};
 const float MAX_DISTANCE_TO_PLAYER{300};
 
+static enum class SheepStates {
+	IDLE,
+	GRAZING,
+	FLEEING
+};
+
 struct Sheep : public SauceMaker {
 public:
 	Sheep();
@@ -25,6 +31,7 @@ public:
 	void moveSheep();
 	void start() override;
 	Vector2 m_playerPos;
+	SheepStates randomStateDecider(i32 index);
 private:
 	std::vector<Vector2> m_sheepPositions;
 	std::vector<Vector2> m_sheepDirections;
@@ -32,7 +39,4 @@ private:
 	MojoPiconMath m_math;
 	i32 m_speed;
 	i32 m_currentSheepCount;
-
-
-
 };

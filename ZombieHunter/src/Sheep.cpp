@@ -36,16 +36,21 @@ void Sheep::drawSprite()
 
 void Sheep::moveSheep()
 {
-    float maxDistSquared = MAX_DISTANCE_TO_PLAYER * MAX_DISTANCE_TO_PLAYER;
-    for (i32 i = 0; i < m_currentSheepCount; i++)
-    {
-        float distance = m_math.squaredDistance(m_sheepPositions[i], m_playerPos);
+    for (i32 i = 0; i < m_currentSheepCount; i++) {
+        SheepStates state = stateMachine(i);
 
-        if (distance <= maxDistSquared)
-        {
+        switch (state) {
+        case SheepStates::FLEEING:
             m_sheepPositions[i].x += m_sheepDirections[i].x * m_speed;
             m_sheepPositions[i].y += m_sheepDirections[i].y * m_speed;
+            break;
+        case SheepStates::IDLE:
+            break;
+        case SheepStates::GRAZING:
+           // Random Value
+            break;
         }
+        
     }
 }
 
@@ -77,6 +82,28 @@ void Sheep::start()
             m_sheepDirections[i].x /= length;
             m_sheepDirections[i].y /= length;
         }
+    }
+}
+
+SheepStates Sheep::stateMachine(i32 index)
+{
+    float maxDistSquared = MAX_DISTANCE_TO_PLAYER * MAX_DISTANCE_TO_PLAYER;
+    float distance = m_math.squaredDistance(m_sheepPositions[index], m_playerPos);
+
+    i32 middleValue = 1000;
+    i32 randomTicket = GetRandomValue(0, 2000);
+
+    if (distance <= maxDistSquared)
+    {
+        return SheepStates::FLEEING;
+    }
+    else if (randomTicket <= middleValue)
+    {
+        return SheepStates::IDLE;
+    }
+    else
+    {
+        return SheepStates::GRAZING;
     }
 }
 

@@ -22,7 +22,7 @@ Player::~Player()
 
 void Player::update(float deltaTime) {
 	drawSprite();
-	moveController();
+	playerInput();
 }
 
 void Player::drawSprite()
@@ -38,7 +38,7 @@ void Player::drawSprite()
 	DrawTexturePro(m_spriteSheet, sourceRect, destRect, origin, 0.0f, WHITE);
 }
 
-void Player::moveController()
+void Player::playerInput()
 {
 	if (IsKeyDown(KEY_LEFT_SHIFT)) {
 		speed = sprintSpeed;
