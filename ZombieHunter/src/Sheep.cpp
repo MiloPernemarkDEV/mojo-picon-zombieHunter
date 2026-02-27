@@ -101,7 +101,7 @@ void Sheep::start()
 SheepStates Sheep::stateMachine(i32 i, float deltaTime)
 {
     float maxDistSquared = MAX_DISTANCE_TO_PLAYER * MAX_DISTANCE_TO_PLAYER * static_cast<float>(GetRandomValue(0, 1));
-    float distance = m_math.squaredDistance(m_sheepPositions[i], m_playerPos);
+    float distance = MojoPiconMath::squaredDistance(m_sheepPositions[i], m_playerPos);
 
     if (distance <= maxDistSquared)
     {

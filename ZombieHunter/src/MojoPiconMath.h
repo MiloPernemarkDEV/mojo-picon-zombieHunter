@@ -4,7 +4,7 @@
 
 struct MojoPiconMath {
 public:
-	inline constexpr float squaredDistance(const Vector2& v, const Vector2& other) {
+	static constexpr float squaredDistance(const Vector2& v, const Vector2& other) {
 		float distanceX = v.x - other.x;
 		float distanceY = v.y - other.y;
 		return distanceX * distanceX + distanceY * distanceY;

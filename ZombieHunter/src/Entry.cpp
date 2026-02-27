@@ -8,15 +8,15 @@ int main(int argv, char* argc[]) {
 
 	try {
 		app.init();
+		app.gameLoop();
+		app.end();
 	}
 	catch (const std::exception& e) {
 		std::cerr << "Error: " << e.what() << std::endl;
 		return EXIT_FAILURE;
 	}
 
-	app.gameLoop();
-
-	app.end();
+	
 
 	return EXIT_SUCCESS;
 }
