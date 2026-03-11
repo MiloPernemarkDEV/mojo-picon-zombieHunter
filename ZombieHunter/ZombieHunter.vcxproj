@@ -15,9 +15,11 @@
     <ClCompile Include="src\Entry.cpp" />
     <ClCompile Include="src\FrameTool.cpp" />
     <ClCompile Include="src\Player.cpp" />
+    <ClCompile Include="src\PlayerData.cpp" />
     <ClCompile Include="src\SauceMaker.cpp" />
     <ClCompile Include="src\SceneManager.cpp" />
     <ClCompile Include="src\Sheep.cpp" />
+    <ClCompile Include="src\Zombie.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Application.h" />
@@ -25,10 +27,12 @@
     <ClInclude Include="src\FrameTool.h" />
     <ClInclude Include="src\MojoPiconMath.h" />
     <ClInclude Include="src\Player.h" />
+    <ClInclude Include="src\PlayerData.h" />
     <ClInclude Include="src\SauceMaker.h" />
     <ClInclude Include="src\SceneManager.h" />
     <ClInclude Include="src\Sheep.h" />
     <ClInclude Include="src\SpriteFilePaths.h" />
+    <ClInclude Include="src\Zombie.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
@@ -79,7 +83,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard>stdcpp23</LanguageStandard>
       <AdditionalIncludeDirectories>$(SolutionDir)\ZombieHunter\src\public;C:\Dev\PersonalProjects\ZombieHunter\ZombieHunterEngine\src\public;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
