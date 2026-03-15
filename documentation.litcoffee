@@ -6,7 +6,7 @@
 * **Entry & Application:** Manages the program lifecycle. This includes raylib window initialization, high-level context setup, and the primary game loop orchestration.
 
 ### Game Management & Scene System
-* **SceneManager:** A centralized state manager that facilitates seamless switching between different game screens, such as the Main Menu, Gameplay, and HUD overlays.
+* **SceneManager:** A centralized state manager that calls all special functions.
 * **Singleton GameManager:** The primary logic coordinator. It handles entity initialization, health monitoring, and game-over conditions while delegating specific tasks to sub-systems.
 
 ### Player & Gameplay Entities
