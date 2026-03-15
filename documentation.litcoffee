@@ -1,5 +1,9 @@
 # Mojo Picon Zombie Hunter
 
+### **Prerequisites**
+* A C++ compiler
+* Standard Template Library (STL)
+
 ## Controls
 
 The game supports a dual-input scheme to accommodate different playstyles.
