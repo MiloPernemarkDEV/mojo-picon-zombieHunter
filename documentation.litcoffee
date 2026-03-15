@@ -11,7 +11,7 @@
 
 ### Player & Gameplay Entities
 * **Player:** Manages complex input processing, movement physics, collision detection, and shooting behavior.
-* **SauceMaker:** A specialized base class for attack logic. It provides shared behavior for the player and other actors to ensure consistent combat mechanics across the board.
+* **SauceMaker:** A specialized base class similar to an entity class.
 
 ### Enemies & NPCs
 * **Zombie:** Features basic AI logic to track and move toward the player, alongside damage-dealing and hit-detection routines.
