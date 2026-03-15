@@ -7,7 +7,7 @@
 
 ### Game Management & Scene System
 * **SceneManager:** A centralized state manager that facilitates seamless switching between different game screens, such as the Main Menu, Gameplay, and HUD overlays.
-* **GameManager:** The primary logic coordinator. It handles entity initialization, health monitoring, and game-over conditions while delegating specific tasks to sub-systems.
+* **Singleton GameManager:** The primary logic coordinator. It handles entity initialization, health monitoring, and game-over conditions while delegating specific tasks to sub-systems.
 
 ### Player & Gameplay Entities
 * **Player:** Manages complex input processing, movement physics, collision detection, and shooting behavior.
