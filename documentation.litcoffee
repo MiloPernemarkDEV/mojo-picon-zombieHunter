@@ -7,7 +7,7 @@
 
 ### Game Management & Scene System
 * **SceneManager:** A centralized state manager that calls all special functions.
-* **Singleton GameManager:** The primary logic coordinator. It handles entity initialization, health monitoring, and game-over conditions while delegating specific tasks to sub-systems.
+* **Singleton GameManager:** The primary gameplay coordinator handling things such as enemy waves. 
 
 ### Player & Gameplay Entities
 * **Player:** Manages complex input processing, movement physics, collision detection, and shooting behavior.
