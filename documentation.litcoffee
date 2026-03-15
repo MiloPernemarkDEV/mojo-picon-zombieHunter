@@ -1,9 +1,5 @@
 # Mojo Picon Zombie Hunter
 
-**Mojo Picon Zombie Hunter** is a 2D top-down shooter prototype built in **C++** using the **raylib** graphics library. This project serves as a comprehensive demonstration of core game engineering principles, including state management, modular entity logic, and persistent data systems.
-
----
-
 ## Project Purpose
 The primary goal of ZombieHunter is to showcase a modular approach to game development. By maintaining a strict **separation of concerns**, the project avoids monolithic code. It utilizes distinct systems for gameplay orchestration, scene management, math utilities, and saving/loading to ensure the codebase remains scalable and maintainable.
 
