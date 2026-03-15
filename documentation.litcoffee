@@ -30,16 +30,3 @@
 ### Utilities
 * **MojoPiconMath:** A custom math library for vector calculations, clamping, and geometric helpers to keep game code clean.
 * **SpriteFilePaths:** A centralized configuration file to manage asset paths, preventing hard-coded strings throughout the logic.
-
----
-
-## Code Architecture
-
-The project is built on a hierarchical flow designed for clarity:
-
-1.  **Application:** Initial setup and main loop.
-2.  **SceneManager:** Determines which "scene" is currently active.
-3.  **GameManager:** Orchestrates the active logic within the gameplay scene.
-4.  **Sub-Systems:** Player, Enemies, UI, and Inventory communicate via public interfaces rather than global variables.
-
-.
