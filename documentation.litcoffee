@@ -1,5 +1,17 @@
 # Mojo Picon Zombie Hunter
 
+## Controls
+
+The game supports a dual-input scheme to accommodate different playstyles.
+
+| Action | Input |
+| :--- | :--- |
+| **Movement** | `W`, `A`, `S`, `D` or `Arrow Keys` |
+| **Active Attack** | `Left Click` (Mouse) |
+| **Dash** | `Left Shift` |
+
+---
+
 ## System Descriptions
 
 ### Application & Core Loop
