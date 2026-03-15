@@ -2,6 +2,8 @@
 
 #include <raylib.h>
 
+// comment
+
 struct MojoPiconMath {
 public:
 	static constexpr float squaredDistance(const Vector2& v, const Vector2& other) {
