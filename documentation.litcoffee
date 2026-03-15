@@ -25,7 +25,7 @@
 * **HUD:** Decouples visual feedback from game logic. It handles the rendering of health bars, inventory slots, and real-time on-screen feedback.
 
 ### Saving & Loading
-* **SaveService:** Implements state persistence by serializing and deserializing data to binary using the STL I/O library.
+* **SaveService:** Handles state persistence by leveraging the STL I/O library to serialize and deserialize data into a binary format.
 
 ### Utilities
 * **MojoPiconMath:** A custom math library for vector calculations, clamping, and geometric helpers to keep game code clean.
