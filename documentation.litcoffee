@@ -1,4 +1,4 @@
-# ZombieHunter 
+# Mojo Picon Zombie Hunter
 
 **ZombieHunter** is a 2D top-down shooter prototype built in **C++** using the **raylib** graphics library. This project serves as a comprehensive demonstration of core game engineering principles, including state management, modular entity logic, and persistent data systems.
 
