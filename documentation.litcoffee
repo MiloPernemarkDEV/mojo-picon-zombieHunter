@@ -1,4 +1,4 @@
-# Mojo Picon Zombie Hunter
+# Mojo Picon: Zombie Hunter
 
 ### **Prerequisites**
 * A C++ compiler
