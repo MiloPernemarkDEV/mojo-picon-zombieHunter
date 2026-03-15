@@ -6,7 +6,7 @@
 
 
 Sheep::Sheep()
-	: m_currentSheepCount(0), m_playerPos{0}, m_fleeSpeed(2), m_texture(0), m_wanderSpeed(1)
+	: m_currentSheepCount(0), m_playerPos{0}, m_fleeSpeed(2), m_texture(0), m_wanderSpeed(1), m_hasSpawned(false)
 {
 }
 
@@ -59,8 +59,10 @@ void Sheep::moveSheep()
 
 void Sheep::start()
 {
-    m_texture = LoadTexture(SFP::SHEEP_PNG);
-    SetTextureFilter(m_texture, TEXTURE_FILTER_POINT);
+    if (m_texture.id == 0) {
+        m_texture = LoadTexture(SFP::SHEEP_PNG);
+        SetTextureFilter(m_texture, TEXTURE_FILTER_POINT);
+    }
 
     if (START_SHEEP_COUNT > MAX_SHEEP_COUNT) {
         m_currentSheepCount = MAX_SHEEP_COUNT;
@@ -69,33 +71,49 @@ void Sheep::start()
         m_currentSheepCount = START_SHEEP_COUNT;
     }
 
-    m_sheepPositions.resize(m_currentSheepCount);
-    m_sheepDirections.resize(m_currentSheepCount);
-    m_sheepStates.resize(m_currentSheepCount);
-    m_sheepStateTimers.resize(m_currentSheepCount);
-
-    for (i32 i = 0; i < m_currentSheepCount; i++)
+   
+    if (!m_hasSpawned)
     {
-        m_sheepStates[i] = SheepStates::GRAZING;
-        m_sheepStateTimers[i] = static_cast<float>(GetRandomValue(1, 5));
+        m_sheepPositions.resize(m_currentSheepCount);
+        m_sheepDirections.resize(m_currentSheepCount);
+        m_sheepStates.resize(m_currentSheepCount);
+        m_sheepStateTimers.resize(m_currentSheepCount);
 
-        m_sheepPositions[i].x = static_cast<float>(GetRandomValue(0, 800));
-        m_sheepPositions[i].y = static_cast<float>(GetRandomValue(0, 900));
-
-        m_sheepDirections[i].x = static_cast<float>(GetRandomValue(-100, 100));
-        m_sheepDirections[i].y = static_cast<float>(GetRandomValue(-100, 100));
-
-        float length = sqrt(
-            m_sheepDirections[i].x * m_sheepDirections[i].x +
-            m_sheepDirections[i].y * m_sheepDirections[i].y
-        );
-
-        if (length != 0)
+        for (i32 i = 0; i < m_currentSheepCount; i++)
         {
-            m_sheepDirections[i].x /= length;
-            m_sheepDirections[i].y /= length;
+            m_sheepStates[i] = SheepStates::GRAZING;
+            m_sheepStateTimers[i] = static_cast<float>(GetRandomValue(1, 5));
+
+            m_sheepPositions[i].x = static_cast<float>(GetRandomValue(0, 800));
+            m_sheepPositions[i].y = static_cast<float>(GetRandomValue(0, 900));
+
+            m_sheepDirections[i].x = static_cast<float>(GetRandomValue(-100, 100));
+            m_sheepDirections[i].y = static_cast<float>(GetRandomValue(-100, 100));
+
+            float length = sqrt(
+                m_sheepDirections[i].x * m_sheepDirections[i].x +
+                m_sheepDirections[i].y * m_sheepDirections[i].y
+            );
+
+            if (length != 0)
+            {
+                m_sheepDirections[i].x /= length;
+                m_sheepDirections[i].y /= length;
+            }
         }
     }
+    else
+    {
+
+        for (i32 i = 0; i < m_currentSheepCount; i++)
+        {
+            if (m_sheepStateTimers[i] <= 0.0f) {
+                m_sheepStateTimers[i] = static_cast<float>(GetRandomValue(1, 5));
+            }
+        }
+    }
+
+    m_hasSpawned = true;
 }
 
 SheepStates Sheep::stateMachine(i32 i, float deltaTime)
@@ -124,6 +142,21 @@ SheepStates Sheep::stateMachine(i32 i, float deltaTime)
     }
 
     return m_sheepStates[i];
+}
+
+void Sheep::setHasSpawned(bool hasSpawned)
+{
+    m_hasSpawned = hasSpawned;
+}
+
+void Sheep::setLoadedPositions(const std::vector<Vector2>& positions)
+{
+    m_sheepPositions = positions;
+    m_currentSheepCount = static_cast<i32>(positions.size());
+
+    m_sheepDirections.resize(m_currentSheepCount);
+    m_sheepStates.resize(m_currentSheepCount);
+    m_sheepStateTimers.resize(m_currentSheepCount);
 }
 
 Vector2 Sheep::fleeDirection(i32 i)

@@ -27,6 +27,24 @@
     <ClCompile Include="src\SceneManager.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\GameManager.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\HUD.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Inventory.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Zombie.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Item_Health.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SaveService.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Application.h">
@@ -54,6 +72,27 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="src\SceneManager.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameManager.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\HUD.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Inventory.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Item.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Zombie.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Item_health.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SaveService.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>

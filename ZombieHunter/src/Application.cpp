@@ -1,48 +1,63 @@
 #include "Application.h"
 #include <raylib.h>
 
-Application::Application() 
-	: m_hasEnded{false}
+Application::Application()
+    : m_hasEnded(false), m_saveService(m_hud, m_sceneManager.getSheep())
 {
-	
 }
 
-Application::~Application() 
+Application::~Application()
 {
-	if (!m_hasEnded) 
-	{
-		end();
-	}
+    if (!m_hasEnded)
+    {
+        end();
+    }
 }
 
-void Application::init() {
-	SetTargetFPS(60);
-	SetConfigFlags(FLAG_WINDOW_RESIZABLE);
-	InitWindow(WIN_WIDTH, WIN_HEIGHT, "Mojo Picon: ZombieLand");
+void Application::init()
+{
+    m_saveService.load_data();
+
+    SetConfigFlags(FLAG_WINDOW_RESIZABLE);
+
+    InitWindow(WIN_WIDTH, WIN_HEIGHT, "Mojo Picon: ZombieLand");
+
+    SetTargetFPS(60);
 }
 
-void Application::end() {
-	
-	m_hasEnded = true;
+void Application::end()
+{
+    m_saveService.save_data();
+    m_hasEnded = true;
 }
 
+void Application::gameLoop()
+{
+    m_sceneManager.start();
 
-	void Application::gameLoop() {
+    while (!WindowShouldClose())
+    {
+        float deltaTime = GetFrameTime();
 
-		m_sceneManager.start();
+        PollInputEvents();
 
-		while (!WindowShouldClose()) 
-		{
-			PollInputEvents();
-			BeginDrawing();
-			ClearBackground(BACKGROUND_COLOR);
+        m_sceneManager.update(deltaTime);
 
-			m_sceneManager.update(GetFrameTime());
-	
+        for (i32 killed : m_sceneManager.getRecentlyKilledZombies())
+        {
+            m_hud.addZombieKill();
+        }
 
-			EndDrawing();
-		}
+        m_hud.update(); 
 
-		CloseWindow();
-	}
+        BeginDrawing();
+        ClearBackground(BACKGROUND_COLOR);
 
+       
+        m_hud.draw();
+
+        EndDrawing();
+    }
+
+    end();
+}

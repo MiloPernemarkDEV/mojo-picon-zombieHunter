@@ -38,6 +38,10 @@ public:
 	SheepStates stateMachine(i32 index, float deltaTime);
 
 	Vector2 m_playerPos;
+	bool getHasSpawned() const {return m_hasSpawned; };
+	void setHasSpawned(bool hasSpawned);
+	void setLoadedPositions(const std::vector<Vector2>& positions);
+	const std::vector<Vector2>& getPositions() const { return m_sheepPositions; };
 private:
 	std::vector<Vector2> m_sheepPositions;
 	std::vector<Vector2> m_sheepDirections;
@@ -48,4 +52,5 @@ private:
 	i32 m_fleeSpeed;
 	i32 m_wanderSpeed;
 	i32 m_currentSheepCount;
+	bool m_hasSpawned;
 };
