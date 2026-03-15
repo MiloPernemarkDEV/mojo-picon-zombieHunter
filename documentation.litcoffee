@@ -1,10 +1,5 @@
 # Mojo Picon Zombie Hunter
 
-## Project Purpose
-The primary goal of ZombieHunter is to showcase a modular approach to game development. By maintaining a strict **separation of concerns**, the project avoids monolithic code. It utilizes distinct systems for gameplay orchestration, scene management, math utilities, and saving/loading to ensure the codebase remains scalable and maintainable.
-
----
-
 ## System Descriptions
 
 ### Application & Core Loop
