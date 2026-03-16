@@ -25,29 +25,24 @@ public:
     ~Zombie();
 
     void update(float deltaTime) override;
-    void drawSprite() override;
+    void draw_sprite() override;
     void start() override;
 
-    void moveZombies(float deltaTime);
+    void move_zombies(float deltaTime);
+    void apply_primary_attack(Vector2 playerPos);
+    void apply_secondary_attack(Vector2 playerPos);
+    void start_wave(i32 waveIndex, Vector2 center);
+    void attack_player(Player& player, float deltaTime);
+    void damage_zombie(i32 index, i32 dmg);
 
-    void applyPrimaryAttack(Vector2 playerPos);
-    void applySecondaryAttack(Vector2 playerPos);
+    // Implicitly inline
+    i32 get_zombie_count() const { return m_currentZombieCount; };
+    Vector2 get_zombie_position(i32 index) const { return m_zombiePositions[index]; };
+    i32 get_zombie_health(i32 index) const { return m_zombieHealth[index]; };
 
-    void startWave(i32 waveIndex, Vector2 center);
-
-    void attackPlayer(Player& player, float deltaTime);
-
-    i32 getAliveCount() const;
-
-    i32 getZombieCount() const;
-    Vector2 getZombiePosition(i32 index) const;
-    i32 getZombieHealth(i32 index) const;
-    void damageZombie(i32 index, i32 dmg);
-
-    std::vector<i32> getKilledSinceLastUpdate(); 
-
+    i32 get_alive_count() const;
+    std::vector<i32> get_killed_since_last_update(); 
     Vector2 m_playerPos;
-
 private:
     std::vector<Vector2> m_zombiePositions;
     std::vector<ZombieType> m_zombieTypes;

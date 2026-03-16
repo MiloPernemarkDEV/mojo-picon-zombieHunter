@@ -12,6 +12,7 @@ public:
 
     void load_data();
     void save_data();
+    void clear_data();
 
 private:
     HUD* m_hud; 

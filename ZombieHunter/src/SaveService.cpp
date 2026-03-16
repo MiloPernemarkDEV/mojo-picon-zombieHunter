@@ -11,34 +11,37 @@ SaveService::SaveService(HUD& hud, Sheep* sheep)
 {
 }
 
-void SaveService::load_data()
-{
-    std::ifstream stream("save.bin", std::ios::binary);
+    void SaveService::load_data()
+    {
+        std::ifstream stream("save.bin", std::ios::binary);
 
-    if (stream.is_open()) {
-        i32 wave, kills;
-        bool spawned;
+        if (!stream.is_open())
+            return;
 
-        stream.read(reinterpret_cast<char*>(&wave), sizeof(wave));
-        stream.read(reinterpret_cast<char*>(&kills), sizeof(kills));
-        stream.read(reinterpret_cast<char*>(&spawned), sizeof(spawned));
+        if (stream.is_open()) {
+            i32 wave, kills;
+            bool spawned;
 
-        GameManager::Instance().setCurrentWave(wave);
-        m_hud->setZombiesKilled(kills);
-        m_sheep->setHasSpawned(spawned);
+            if (!stream.read(reinterpret_cast<char*>(&wave), sizeof(wave))) return;
+            if (!stream.read(reinterpret_cast<char*>(&kills), sizeof(kills))) return;
+            if (!stream.read(reinterpret_cast<char*>(&spawned), sizeof(spawned))) return;
 
-        size_t count = 0;
-        if (stream.read(reinterpret_cast<char*>(&count), sizeof(count))) {
-            std::vector<Vector2> loadedPos(count); 
+            GameManager::Instance().setCurrentWave(wave);
+            m_hud->setZombiesKilled(kills);
+            m_sheep->setHasSpawned(spawned);
 
-            stream.read(reinterpret_cast<char*>(loadedPos.data()), count * sizeof(Vector2));
+            size_t count = 0;
+            if (stream.read(reinterpret_cast<char*>(&count), sizeof(count))) {
+                std::vector<Vector2> loadedPos(count); 
 
-            m_sheep->setLoadedPositions(loadedPos);
+                stream.read(reinterpret_cast<char*>(loadedPos.data()), count * sizeof(Vector2));
+
+                m_sheep->setLoadedPositions(loadedPos);
+            }
+
+            stream.close();
         }
-
-        stream.close();
     }
-}
 
 void SaveService::save_data()
 {
@@ -64,4 +67,9 @@ void SaveService::save_data()
 
         stream.close();
     }
+}
+
+void SaveService::clear_data()
+{
+    std::ofstream("save.bin", std::ios::binary | std::ios::trunc);
 }

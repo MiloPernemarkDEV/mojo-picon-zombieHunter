@@ -40,11 +40,11 @@ void Zombie::start()
 
 void Zombie::update(float deltaTime)
 {
-    moveZombies(deltaTime);
-    drawSprite();
+    move_zombies(deltaTime);
+    draw_sprite();
 }
 
-void Zombie::drawSprite()
+void Zombie::draw_sprite()
 {
     for (i32 i = 0; i < m_currentZombieCount; i++)
     {
@@ -82,7 +82,7 @@ void Zombie::drawSprite()
     }
 }
 
-void Zombie::moveZombies(float deltaTime)
+void Zombie::move_zombies(float deltaTime)
 {
     const float separationDistance = m_zombieRadius * 2.0f;
     const float separationStrength = 0.5f;
@@ -131,7 +131,7 @@ void Zombie::moveZombies(float deltaTime)
     }
 }
 
-void Zombie::applyPrimaryAttack(Vector2 playerPos)
+void Zombie::apply_primary_attack(Vector2 playerPos)
 {
     const float range = 60.0f;
     const float rangeSq = range * range;
@@ -141,13 +141,13 @@ void Zombie::applyPrimaryAttack(Vector2 playerPos)
         if (m_zombieHealth[i] <= 0)
             continue;
 
-        const float distSq = MojoPiconMath::squaredDistance(m_zombiePositions[i], playerPos);
+        const float distSq = MojoPiconMath::squared_distance(m_zombiePositions[i], playerPos);
         if (distSq <= rangeSq)
             m_zombieHealth[i] -= 1;
     }
 }
 
-void Zombie::applySecondaryAttack(Vector2 playerPos)
+void Zombie::apply_secondary_attack(Vector2 playerPos)
 {
     const float range = 100.0f;
     const float rangeSq = range * range;
@@ -157,13 +157,13 @@ void Zombie::applySecondaryAttack(Vector2 playerPos)
         if (m_zombieHealth[i] <= 0)
             continue;
 
-        const float distSq = MojoPiconMath::squaredDistance(m_zombiePositions[i], playerPos);
+        const float distSq = MojoPiconMath::squared_distance(m_zombiePositions[i], playerPos);
         if (distSq <= rangeSq)
             m_zombieHealth[i] -= 3;
     }
 }
 
-void Zombie::startWave(i32 waveIndex, Vector2 center)
+void Zombie::start_wave(i32 waveIndex, Vector2 center)
 {
     const i32 baseCount = START_ZOMBIE_COUNT;
     const i32 incrementPerWave = 5;
@@ -196,7 +196,7 @@ void Zombie::startWave(i32 waveIndex, Vector2 center)
     }
 }
 
-i32 Zombie::getAliveCount() const
+i32 Zombie::get_alive_count() const
 {
     i32 alive = 0;
     for (i32 i = 0; i < m_currentZombieCount; i++)
@@ -207,10 +207,10 @@ i32 Zombie::getAliveCount() const
     return alive;
 }
 
-void Zombie::attackPlayer(Player& player, float deltaTime)
+void Zombie::attack_player(Player& player, float deltaTime)
 {
     m_attackTimer += deltaTime;
-    Vector2 playerPos = player.getPlayerPosition();
+    Vector2 playerPos = player.get_player_position();
     const float attackRangeTotal = m_zombieRadius + m_attackRange;
     const float attackRangeSq = attackRangeTotal * attackRangeTotal;
 
@@ -219,10 +219,10 @@ void Zombie::attackPlayer(Player& player, float deltaTime)
         if (m_zombieHealth[i] <= 0)
             continue;
 
-        float distSq = MojoPiconMath::squaredDistance(m_zombiePositions[i], playerPos);
+        float distSq = MojoPiconMath::squared_distance(m_zombiePositions[i], playerPos);
         if (distSq <= attackRangeSq && m_attackTimer >= m_attackCooldown)
         {
-            player.takeDamage(10);
+            player.take_damage(10);
             m_attackTimer = 0.0f;
 
             AttackEffect effect;
@@ -235,22 +235,7 @@ void Zombie::attackPlayer(Player& player, float deltaTime)
     }
 }
 
-i32 Zombie::getZombieCount() const
-{
-    return m_currentZombieCount;
-}
-
-Vector2 Zombie::getZombiePosition(i32 index) const
-{
-    return m_zombiePositions[index];
-}
-
-i32 Zombie::getZombieHealth(i32 index) const
-{
-    return m_zombieHealth[index];
-}
-
-void Zombie::damageZombie(i32 index, i32 dmg)
+void Zombie::damage_zombie(i32 index, i32 dmg)
 {
     if (index >= 0 && index < m_currentZombieCount)
     {
@@ -264,7 +249,7 @@ void Zombie::damageZombie(i32 index, i32 dmg)
     }
 }
 
-std::vector<i32> Zombie::getKilledSinceLastUpdate()
+std::vector<i32> Zombie::get_killed_since_last_update()
 {
     std::vector<i32> killed = m_recentlyKilled;
     m_recentlyKilled.clear();

@@ -44,7 +44,7 @@ void GameManager::update(float deltaTime, i32 aliveEnemies)
 	}
 }
 
-bool GameManager::consumeSpawnWaveRequest()
+bool GameManager::consume_spawn_wave_request()
 {
 	if (!m_spawnNextWave)
 	{
@@ -55,8 +55,13 @@ bool GameManager::consumeSpawnWaveRequest()
 	return true;
 }
 
-i32 GameManager::setCurrentWave(i32 wave)
+i32 GameManager::set_current_wave(i32 wave)
 {
 	return m_currentWave = wave;
+}
+
+i32 GameManager::set_item_count(i32 count)
+{
+	m_itemCount = count;
 }
 

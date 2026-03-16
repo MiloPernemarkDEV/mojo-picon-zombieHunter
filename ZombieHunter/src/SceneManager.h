@@ -18,19 +18,17 @@ public:
     void start();
     void update(float deltaTime);
 
-    std::vector<i32> getRecentlyKilledZombies();
+    std::vector<i32> get_recently_killed_zombies();
 
-    Sheep* getSheep() { return &m_Sheep; }
+    Sheep* get_sheep() { return &m_Sheep; }
 
 private:
-    std::vector<SauceMaker*> sauces;
+    void add_sauce();
 
+    std::vector<SauceMaker*> sauces;
     Zombie m_Zombie;     
     Player m_Player;
     Sheep m_Sheep;
     FrameTool m_FrameTool;
-
-    void addSauce();
-
     std::vector<i32> m_recentlyKilledZombies;
 };

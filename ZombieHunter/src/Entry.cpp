@@ -8,7 +8,7 @@ int main(int argv, char* argc[]) {
 
 	try {
 		app.init();
-		app.gameLoop();
+		app.game_loop();
 		app.end();
 	}
 	catch (const std::exception& e) {

@@ -28,38 +28,38 @@ public:
     void playerInput();
     void start() override;
 
-    Vector2 getPlayerPosition() { return position; }
-    i32 getCurrentHealth() const { return currentHealth; }
-    void takeDamage(i32 amount) { currentHealth = std::max(0, currentHealth - amount); }
-    bool isPrimaryAttackTriggered() const { return m_primaryAttackTriggered; }
-    bool isSecondaryAttackTriggered() const { return m_secondaryAttackTriggered; }
-    void addPassiveKill() { m_passiveKills++; }
-    i32 getPassiveBonus() const { return m_passiveKills / 10; }
+    Vector2 get_player_position() { return m_position; }
+    i32 get_current_health() const { return m_currentHealth; }
+    void take_damage(i32 amount) { m_currentHealth = std::max(0, m_currentHealth - amount); }
+    bool is_primary_attack_triggered() const { return m_primaryAttackTriggered; }
+    bool is_secondary_attack_triggered() const { return m_secondaryAttackTriggered; }
+    void add_passive_kill() { m_passiveKills++; }
+    i32 get_passive_bonus() const { return m_passiveKills / 10; }
 
 private:
-    void passiveAttack();
-    void primaryAttack();
-    void secondaryAttack();
-    void drawPassiveEffects();
-    void drawActiveEffects();
-    void drawHealthBar();
+    void passive_attack();
+    void primary_attack();
+    void secondary_attack();
+    void draw_passive_effects();
+    void draw_active_effects();
+    void draw_health_bar();
 
 private:
     Texture2D m_spriteSheet;
 
-    i32 frameCount;
-    i32 frameWidth;
-    i32 frameIndex;
-    i32 frameHeight;
+    i32 m_frameCount;
+    i32 m_frameWidth;
+    i32 m_frameIndex;
+    i32 m_frameHeight;
 
-    float speed;
-    float walkSpeed;
-    float sprintSpeed;
+    float m_speed;
+    float m_walkSpeed;
+    float m_sprintSpeed;
 
-    Vector2 position;
+    Vector2 m_position;
 
-    i32 maxHealth;
-    i32 currentHealth;
+    i32 m_maxHealth;
+    i32 m_currentHealth;
 
     bool m_primaryAttackTriggered;
     bool m_secondaryAttackTriggered;

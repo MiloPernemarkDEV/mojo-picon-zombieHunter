@@ -31,17 +31,17 @@ public:
 	~Sheep();
 
 	void update(float deltaTime) override;
-	void drawSprite() override;
-	void moveSheep();
+	void draw_sprite() override;
+	void move_sheep();
 	void start() override;
-	Vector2 fleeDirection(i32 i);
-	SheepStates stateMachine(i32 index, float deltaTime);
+	Vector2 flee_direction(i32 i);
+	SheepStates state_machine(i32 index, float deltaTime);
 
 	Vector2 m_playerPos;
-	bool getHasSpawned() const {return m_hasSpawned; };
-	void setHasSpawned(bool hasSpawned);
-	void setLoadedPositions(const std::vector<Vector2>& positions);
-	const std::vector<Vector2>& getPositions() const { return m_sheepPositions; };
+	bool get_has_spawned() const {return m_hasSpawned; };
+	void set_has_spawned(bool hasSpawned);
+	void set_loaded_positions(const std::vector<Vector2>& positions);
+	const std::vector<Vector2>& get_positions() const { return m_sheepPositions; };
 private:
 	std::vector<Vector2> m_sheepPositions;
 	std::vector<Vector2> m_sheepDirections;
