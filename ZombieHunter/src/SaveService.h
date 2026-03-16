@@ -18,9 +18,6 @@ public:
 private:
     HUD* m_hud;
     Sheep* m_sheep;
-
-    i32 m_loadedWave;
-    i32 m_currentWave;
     i32 m_killedZombies;
     bool m_sheepHasSpawned;
 };

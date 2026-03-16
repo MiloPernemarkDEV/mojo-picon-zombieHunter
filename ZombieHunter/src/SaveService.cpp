@@ -7,8 +7,6 @@
 SaveService::SaveService(HUD* hud, Sheep* sheep)
     : m_hud(hud),
     m_sheep(sheep),
-    m_loadedWave(0),
-    m_currentWave(0),
     m_killedZombies(0)
 
 {
