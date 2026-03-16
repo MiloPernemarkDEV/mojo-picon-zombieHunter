@@ -38,10 +38,10 @@ void Application::end()
 void Application::game_loop()
 {
     m_sceneManager.start();
-
+    float deltaTime;
     while (!WindowShouldClose())
     {
-        float deltaTime = GetFrameTime();
+        deltaTime = GetFrameTime();
 
         PollInputEvents();
 
