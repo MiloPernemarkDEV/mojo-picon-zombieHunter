@@ -9,46 +9,46 @@ SceneManager::SceneManager()
 
 void SceneManager::start() 
 {
-    addSauce();
+    add_sauce();
 
     for (i32 i = 0; i < sauces.size(); i++) 
         sauces[i]->start();
 
     GameManager::Instance().start();
 
-    m_Zombie.startWave(1, m_Player.getPlayerPosition());
+    m_Zombie.start_wave(1, m_Player.get_player_position());
 }
 
 void SceneManager::update(float deltaTime) 
 {
-    m_Sheep.m_playerPos = m_Player.getPlayerPosition();
-    m_Zombie.m_playerPos = m_Player.getPlayerPosition();
+    m_Sheep.m_playerPos = m_Player.get_player_position();
+    m_Zombie.m_playerPos = m_Player.get_player_position();
 
     for (i32 i = 0; i < sauces.size(); i++) 
         sauces[i]->update(deltaTime);
 
-    if (m_Player.isPrimaryAttackTriggered())
-        m_Zombie.applyPrimaryAttack(m_Player.getPlayerPosition());
+    if (m_Player.is_primary_attack_triggered())
+        m_Zombie.apply_primary_attack(m_Player.get_player_position());
 
-    if (m_Player.isSecondaryAttackTriggered())
-        m_Zombie.applySecondaryAttack(m_Player.getPlayerPosition());
+    if (m_Player.is_secondary_attack_triggered())
+        m_Zombie.apply_secondary_attack(m_Player.get_player_position());
 
-    m_Zombie.attackPlayer(m_Player, deltaTime);
+    m_Zombie.attack_player(m_Player, deltaTime);
 
-    i32 alive = m_Zombie.getAliveCount();
+    i32 alive = m_Zombie.get_alive_count();
     GameManager::Instance().update(deltaTime, alive);
-    if (GameManager::Instance().consumeSpawnWaveRequest())
-        m_Zombie.startWave(GameManager::Instance().getCurrentWave(), m_Player.getPlayerPosition());
+    if (GameManager::Instance().consume_spawn_wave_request())
+        m_Zombie.start_wave(GameManager::Instance().get_current_wave(), m_Player.get_player_position());
 
-    m_recentlyKilledZombies = m_Zombie.getKilledSinceLastUpdate();
+    m_recentlyKilledZombies = m_Zombie.get_killed_since_last_update();
 }
 
-std::vector<i32> SceneManager::getRecentlyKilledZombies()
+std::vector<i32> SceneManager::get_recently_killed_zombies()
 {
     return m_recentlyKilledZombies;
 }
 
-void SceneManager::addSauce()
+void SceneManager::add_sauce()
 {
     sauces.push_back(&m_FrameTool);
     sauces.push_back(&m_Player);

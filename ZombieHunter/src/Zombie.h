@@ -36,7 +36,7 @@ public:
     void damage_zombie(i32 index, i32 dmg);
 
     // Implicitly inline
-    i32 get_zombie_count() const { return m_currentZombieCount; };
+    i32 get_zombie_count() const;
     Vector2 get_zombie_position(i32 index) const { return m_zombiePositions[index]; };
     i32 get_zombie_health(i32 index) const { return m_zombieHealth[index]; };
 

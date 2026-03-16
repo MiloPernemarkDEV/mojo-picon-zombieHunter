@@ -6,10 +6,10 @@
 
 void FrameTool::update(float deltaTime)
 {
-	drawSprite();
+	draw_sprite();
 }
 
-void FrameTool::drawSprite()
+void FrameTool::draw_sprite()
 {
 	DrawFPS(0, 0);
 }

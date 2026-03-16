@@ -249,6 +249,11 @@ void Zombie::damage_zombie(i32 index, i32 dmg)
     }
 }
 
+i32 Zombie::get_zombie_count() const
+{
+    return m_currentZombieCount; 
+}
+
 std::vector<i32> Zombie::get_killed_since_last_update()
 {
     std::vector<i32> killed = m_recentlyKilled;

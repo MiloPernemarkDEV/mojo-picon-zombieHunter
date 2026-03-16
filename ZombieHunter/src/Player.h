@@ -24,7 +24,7 @@ public:
     ~Player();
 
     void update(float deltaTime) override;
-    void drawSprite() override;
+    void draw_sprite() override;
     void playerInput();
     void start() override;
 
@@ -35,6 +35,7 @@ public:
     bool is_secondary_attack_triggered() const { return m_secondaryAttackTriggered; }
     void add_passive_kill() { m_passiveKills++; }
     i32 get_passive_bonus() const { return m_passiveKills / 10; }
+    void add_health(i32 amount);
 
 private:
     void passive_attack();

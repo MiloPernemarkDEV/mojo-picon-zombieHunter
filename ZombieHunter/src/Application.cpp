@@ -2,7 +2,7 @@
 #include <raylib.h>
 
 Application::Application()
-    : m_hasEnded(false), m_saveService(m_hud, m_sceneManager.getSheep())
+    : m_hasEnded(false), m_saveService(m_hud, m_sceneManager.get_sheep())
 {
 }
 
@@ -31,7 +31,7 @@ void Application::end()
     m_hasEnded = true;
 }
 
-void Application::gameLoop()
+void Application::game_loop()
 {
     m_sceneManager.start();
 
@@ -43,9 +43,9 @@ void Application::gameLoop()
 
         m_sceneManager.update(deltaTime);
 
-        for (i32 killed : m_sceneManager.getRecentlyKilledZombies())
+        for (i32 killed : m_sceneManager.get_recently_killed_zombies())
         {
-            m_hud.addZombieKill();
+            m_hud.add_zombie_kill();
         }
 
         m_hud.update(); 

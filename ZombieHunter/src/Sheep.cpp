@@ -16,11 +16,11 @@ Sheep::~Sheep()
 
 void Sheep::update(float deltaTime)
 {
-    drawSprite();
-	moveSheep();
+    draw_sprite();
+	move_sheep();
 }
 
-void Sheep::drawSprite()
+void Sheep::draw_sprite()
 {
 	for (i32 i = 0; i < m_currentSheepCount; i++) {
         float scale = 0.03f;
@@ -34,14 +34,14 @@ void Sheep::drawSprite()
 	}
 }
 
-void Sheep::moveSheep()
+void Sheep::move_sheep()
 {
     for (i32 i = 0; i < m_currentSheepCount; i++) {
-        SheepStates state = stateMachine(i, GetFrameTime());
+        SheepStates state = state_machine(i, GetFrameTime());
 
         switch (state) {
         case SheepStates::FLEEING:
-            Vector2 fleeDir = fleeDirection(i);
+            Vector2 fleeDir = flee_direction(i);
             m_sheepPositions[i].x += fleeDir.x * m_fleeSpeed;
             m_sheepPositions[i].y += fleeDir.y * m_fleeSpeed;
             break;
@@ -116,10 +116,10 @@ void Sheep::start()
     m_hasSpawned = true;
 }
 
-SheepStates Sheep::stateMachine(i32 i, float deltaTime)
+SheepStates Sheep::state_machine(i32 i, float deltaTime)
 {
     float maxDistSquared = MAX_DISTANCE_TO_PLAYER * MAX_DISTANCE_TO_PLAYER * static_cast<float>(GetRandomValue(0, 1));
-    float distance = MojoPiconMath::squaredDistance(m_sheepPositions[i], m_playerPos);
+    float distance = MojoPiconMath::squared_distance(m_sheepPositions[i], m_playerPos);
 
     if (distance <= maxDistSquared)
     {
@@ -144,12 +144,12 @@ SheepStates Sheep::stateMachine(i32 i, float deltaTime)
     return m_sheepStates[i];
 }
 
-void Sheep::setHasSpawned(bool hasSpawned)
+void Sheep::set_has_spawned(bool hasSpawned)
 {
     m_hasSpawned = hasSpawned;
 }
 
-void Sheep::setLoadedPositions(const std::vector<Vector2>& positions)
+void Sheep::set_loaded_positions(const std::vector<Vector2>& positions)
 {
     m_sheepPositions = positions;
     m_currentSheepCount = static_cast<i32>(positions.size());
@@ -159,7 +159,7 @@ void Sheep::setLoadedPositions(const std::vector<Vector2>& positions)
     m_sheepStateTimers.resize(m_currentSheepCount);
 }
 
-Vector2 Sheep::fleeDirection(i32 i)
+Vector2 Sheep::flee_direction(i32 i)
 {
     Vector2 fleeDir;
     fleeDir.x = m_sheepPositions[i].x - m_playerPos.x;

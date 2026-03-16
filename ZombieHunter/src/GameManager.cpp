@@ -52,6 +52,7 @@ bool GameManager::consume_spawn_wave_request()
 	}
 
 	m_spawnNextWave = false;
+
 	return true;
 }
 
@@ -62,6 +63,12 @@ i32 GameManager::set_current_wave(i32 wave)
 
 i32 GameManager::set_item_count(i32 count)
 {
-	m_itemCount = count;
+	return m_itemCount = count;
+}
+
+void GameManager::add_item_to_count(i32 count)
+{
+	if (count <= 0) { return; }
+	m_itemCount += count;
 }
 

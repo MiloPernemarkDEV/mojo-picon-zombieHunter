@@ -8,7 +8,7 @@ HUD::HUD()
 {
 }
 
-void HUD::addZombieKill()
+void HUD::add_zombie_kill()
 {
     m_zombiesKilled++;
 
@@ -27,7 +27,7 @@ void HUD::update()
 void HUD::draw()
 {
     std::stringstream waveText;
-    waveText << "Wave: " << GameManager::Instance().getCurrentWave();
+    waveText << "Wave: " << GameManager::Instance().get_current_wave();
     DrawText(waveText.str().c_str(), 20, 20, 20, WHITE);
 
     std::stringstream killsText;
@@ -39,7 +39,7 @@ void HUD::draw()
     DrawText(bonusText.str().c_str(), 20, 80, 20, YELLOW);
 }
 
-void HUD::setZombiesKilled(int amount)
+void HUD::set_zombies_killed(int amount)
 {
     m_zombiesKilled = amount;
     m_passiveBonus = m_zombiesKilled / m_killsPerUpgrade;

@@ -9,13 +9,13 @@ class HUD
 public:
     HUD();
 
-    void addZombieKill();
+    void add_zombie_kill();
     void update();
     void draw();
     
-    void setZombiesKilled(int amount);
-    i32 getZombieKills() const { return m_zombiesKilled; }
-    i32 getPassiveBonus() const { return m_passiveBonus; }
+    void set_zombies_killed(int amount);
+    i32 get_zombies_killed() const { return m_zombiesKilled; }
+    i32 get_passive_bonus() const { return m_passiveBonus; }
 
 private:
     i32 m_zombiesKilled;

@@ -5,7 +5,7 @@
 struct FrameTool : public SauceMaker  {
 public:
 	void update(float deltaTime) override;
-	void drawSprite() override;
+	void draw_sprite() override;
 	void start() override;
 private: 
 };

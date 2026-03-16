@@ -22,16 +22,16 @@
     Player::Player(Zombie& zombieManager)
         : m_spriteSheet{},
         zombieManager(zombieManager),
-        position{ 720, 400 },
-        speed{ 0 },
-        walkSpeed{ 2.7f },
-        sprintSpeed{ 8.0f },
-        frameCount{ 8 },
-        frameWidth{ 0 },
-        frameHeight{ 0 },
-        frameIndex{ 0 },
-        maxHealth{ 100 },
-        currentHealth{ 100 },
+        m_position{ 720, 400 },
+        m_speed{ 0 },
+        m_walkSpeed{ 2.7f },
+        m_sprintSpeed{ 8.0f },
+        m_frameCount{ 8 },
+        m_frameWidth{ 0 },
+        m_frameHeight{ 0 },
+        m_frameIndex{ 0 },
+        m_maxHealth{ 100 },
+        m_currentHealth{ 100 },
         m_primaryAttackTriggered{ false },
         m_secondaryAttackTriggered{ false },
         m_primaryAttackVisualTime{ 0.0f },
@@ -70,19 +70,19 @@
         }
 
         if (m_primaryAttackTriggered)
-            primaryAttack();
+            primary_attack();
 
         if (m_secondaryAttackTriggered)
-            secondaryAttack();
+            secondary_attack();
 
-        passiveAttack();
+        passive_attack();
 
-        drawSprite();
+        draw_sprite();
     }
 
     void Player::playerInput()
     {
-        speed = IsKeyDown(KEY_LEFT_SHIFT) ? sprintSpeed : walkSpeed;
+        m_speed = IsKeyDown(KEY_LEFT_SHIFT) ? m_sprintSpeed : m_walkSpeed;
 
         Vector2 moveDir = { 0, 0 };
         if (IsKeyDown(KEY_W) || IsKeyDown(KEY_UP)) moveDir.y -= 1;
@@ -96,8 +96,8 @@
             moveDir.x /= len;
             moveDir.y /= len;
 
-            position.x += moveDir.x * speed;
-            position.y += moveDir.y * speed;
+            m_position.x += moveDir.x * m_speed;
+            m_position.y += moveDir.y * m_speed;
         }
 
         if (IsKeyPressed(KEY_Q))
@@ -109,7 +109,7 @@
         }
     }
 
-    void Player::primaryAttack()
+    void Player::primary_attack()
     {
         Vector2 target = GetMousePosition();
 
@@ -132,17 +132,17 @@
 
         g_activeEffects.push_back(effect);
 
-        for (i32 i = 0; i < zombieManager.getZombieCount(); i++)
+        for (i32 i = 0; i < zombieManager.get_zombie_count(); i++)
         {
-            Vector2 zombiePos = zombieManager.getZombiePosition(i);
-            float distSq = MojoPiconMath::squaredDistance(target, zombiePos);
+            Vector2 zombiePos = zombieManager.get_zombie_position(i);
+            float distSq = MojoPiconMath::squared_distance(target, zombiePos);
 
             if (distSq <= effect.maxRadius * effect.maxRadius)
-                zombieManager.damageZombie(i, 10);
+                zombieManager.damage_zombie(i, 10);
         }
     }
 
-    void Player::secondaryAttack()
+    void Player::secondary_attack()
     {
         Vector2 target = GetMousePosition();
 
@@ -164,32 +164,38 @@
 
         g_activeEffects.push_back(effect);
 
-        for (i32 i = 0; i < zombieManager.getZombieCount(); i++)
+        for (i32 i = 0; i < zombieManager.get_zombie_count(); i++)
         {
-            Vector2 zombiePos = zombieManager.getZombiePosition(i);
-            float distSq = MojoPiconMath::squaredDistance(target, zombiePos);
+            Vector2 zombiePos = zombieManager.get_zombie_position(i);
+            float distSq = MojoPiconMath::squared_distance(target, zombiePos);
 
             if (distSq <= effect.maxRadius * effect.maxRadius)
-                zombieManager.damageZombie(i, 15);
+                zombieManager.damage_zombie(i, 15);
         }
     }
 
-    void Player::passiveAttack()
+    void Player::add_health(i32 amount)
     {
-        Vector2 playerPos = getPlayerPosition();
+        if (amount <= 0) return;
+        m_currentHealth += amount;
+    }
 
-        for (i32 i = 0; i < zombieManager.getZombieCount(); i++)
+    void Player::passive_attack()
+    {
+        Vector2 playerPos = get_player_position();
+
+        for (i32 i = 0; i < zombieManager.get_zombie_count(); i++)
         {
-            Vector2 zombiePos = zombieManager.getZombiePosition(i);
+            Vector2 zombiePos = zombieManager.get_zombie_position(i);
 
-            if (zombieManager.getZombieHealth(i) <= 0)
+            if (zombieManager.get_zombie_health(i) <= 0)
                 continue;
 
-            float distSq = MojoPiconMath::squaredDistance(playerPos, zombiePos);
+            float distSq = MojoPiconMath::squared_distance(playerPos, zombiePos);
 
             if (distSq <= PASSIVE_ATTACK_RANGE * PASSIVE_ATTACK_RANGE)
             {
-                zombieManager.damageZombie(i, 1 + getPassiveBonus());
+                zombieManager.damage_zombie(i, 1 + get_passive_bonus());
 
                 PassiveHitEffect effect;
                 effect.position = zombiePos;
@@ -200,42 +206,42 @@
         }
     }
 
-    void Player::drawSprite()
+    void Player::draw_sprite()
     {
         Rectangle sourceRect =
         {
-            (float)frameIndex * frameWidth,
+            (float)m_frameIndex * m_frameWidth,
             0,
-            (float)frameWidth,
-            (float)frameHeight
+            (float)m_frameWidth,
+            (float)m_frameHeight
         };
 
         float scale = 3.0f;
 
         Rectangle destRect =
         {
-            position.x,
-            position.y,
-            frameWidth * scale,
-            frameHeight * scale
+            m_position.x,
+            m_position.y,
+            m_frameWidth * scale,
+            m_frameHeight * scale
         };
 
         Vector2 origin =
         {
-            (frameWidth * scale) * 0.5f,
-            frameHeight * scale
+            (m_frameWidth * scale) * 0.5f,
+            m_frameHeight * scale
         };
 
         DrawTexturePro(m_spriteSheet, sourceRect, destRect, origin, 0.0f, WHITE);
 
-        DrawCircleV(position, 4, BLUE);
+        DrawCircleV(m_position, 4, BLUE);
 
-        drawActiveEffects();
-        drawPassiveEffects();
-        drawHealthBar();
+        draw_active_effects();
+        draw_passive_effects();
+        draw_health_bar();
     }
 
-    void Player::drawPassiveEffects()
+    void Player::draw_passive_effects()
     {
         for (i32 i = (i32)g_passiveHitEffects.size() - 1; i >= 0; i--)
         {
@@ -250,7 +256,7 @@
         }
     }
 
-    void Player::drawActiveEffects()
+    void Player::draw_active_effects()
     {
         for (i32 i = (i32)g_activeEffects.size() - 1; i >= 0; i--)
         {
@@ -282,18 +288,18 @@
         }
     }
 
-    void Player::drawHealthBar()
+    void Player::draw_health_bar()
     {
         const float barWidth = 100.0f;
         const float barHeight = 10.0f;
         const float offsetY = 70.0f;
 
-        float healthPercent = (float)currentHealth / (float)maxHealth;
+        float healthPercent = (float)m_currentHealth / (float)m_maxHealth;
 
         Vector2 barPos =
         {
-            position.x - barWidth / 2,
-            position.y - offsetY
+            m_position.x - barWidth / 2,
+            m_position.y - offsetY
         };
 
         DrawRectangle((int)barPos.x, (int)barPos.y, (int)barWidth, (int)barHeight, GRAY);

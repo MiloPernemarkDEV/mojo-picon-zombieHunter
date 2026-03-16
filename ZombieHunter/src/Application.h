@@ -21,7 +21,7 @@ public:
     ~Application();
 
     void init();
-    void gameLoop();
+    void game_loop();
     void end();
 
 private:
