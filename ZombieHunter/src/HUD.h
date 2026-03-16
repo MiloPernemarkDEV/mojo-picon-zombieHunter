@@ -1,25 +1,31 @@
 #pragma once
-
+#include <vector>
 #include "Defines.h"
-#include "GameManager.h"
 #include <raylib.h>
+#include "GameManager.h"
+
+class SaveService; 
 
 class HUD
 {
 public:
     HUD();
 
-    void add_zombie_kill();
-    void update();
+    void update(float deltaTime);
     void draw();
-    
+    void add_zombie_kill();
     void set_zombies_killed(int amount);
-    i32 get_zombies_killed() const { return m_zombiesKilled; }
-    i32 get_passive_bonus() const { return m_passiveBonus; }
+
+    void setSaveService(SaveService* saveService) { m_saveService = saveService; }
+    int get_zombies_killed() const { return m_zombiesKilled; }
 
 private:
-    i32 m_zombiesKilled;
-    i32 m_passiveBonus; 
+    void draw_settings();
 
-    const i32 m_killsPerUpgrade = 10;
+    int m_zombiesKilled;
+    int m_passiveBonus;
+    const int m_killsPerUpgrade = 5;
+    bool m_showSettings = false;
+
+    SaveService* m_saveService = nullptr;  
 };

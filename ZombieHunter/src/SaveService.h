@@ -1,21 +1,22 @@
 #pragma once
-#include <iostream>
 #include <vector>
-#include "GameManager.h"
-#include "HUD.h"
-#include "Sheep.h"
 #include "Defines.h" 
+
+
+class HUD;
+class Sheep;
+class GameManager;
 
 class SaveService {
 public:
-    SaveService(HUD& hud, Sheep* sheep);
+    SaveService(HUD* hud, Sheep* sheep);
 
     void load_data();
     void save_data();
     void clear_data();
 
 private:
-    HUD* m_hud; 
+    HUD* m_hud;
     Sheep* m_sheep;
 
     i32 m_loadedWave;

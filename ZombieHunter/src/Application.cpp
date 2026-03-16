@@ -2,8 +2,10 @@
 #include <raylib.h>
 
 Application::Application()
-    : m_hasEnded(false), m_saveService(m_hud, m_sceneManager.get_sheep())
+    : m_hasEnded(false), m_saveService(&m_hud, m_sceneManager.get_sheep())
 {
+    m_saveService = SaveService(&m_hud, m_sceneManager.get_sheep());
+    m_hud.setSaveService(&m_saveService);
 }
 
 Application::~Application()
@@ -48,7 +50,7 @@ void Application::game_loop()
             m_hud.add_zombie_kill();
         }
 
-        m_hud.update(); 
+        m_hud.update(deltaTime); 
 
         BeginDrawing();
         ClearBackground(BACKGROUND_COLOR);

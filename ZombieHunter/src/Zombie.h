@@ -7,7 +7,7 @@
 struct Player;
 
 const i32 START_ZOMBIE_COUNT{ 10 };
-const i32 MAX_ZOMBIE_COUNT{ 30 };
+const i32 MAX_ZOMBIE_COUNT{ 1000 };
 
 const i32 WALKER_ZOMBIE_HEALTH{ 30 };
 const i32 RUNNER_ZOMBIE_HEALTH{ 20 };
