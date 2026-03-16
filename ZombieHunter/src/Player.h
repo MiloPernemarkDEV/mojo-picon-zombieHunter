@@ -25,7 +25,7 @@ public:
 
     void update(float deltaTime) override;
     void draw_sprite() override;
-    void playerInput();
+    void playerInput(float deltaTime);
     void start() override;
 
     Vector2 get_player_position() { return m_position; }

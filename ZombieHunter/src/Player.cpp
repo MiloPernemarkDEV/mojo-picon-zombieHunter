@@ -24,8 +24,8 @@
         zombieManager(zombieManager),
         m_position{ 720, 400 },
         m_speed{ 0 },
-        m_walkSpeed{ 2.7f },
-        m_sprintSpeed{ 8.0f },
+        m_walkSpeed{ 200.0f },
+        m_sprintSpeed{ 300.0f },
         m_frameCount{ 8 },
         m_frameWidth{ 0 },
         m_frameHeight{ 0 },
@@ -52,7 +52,7 @@
         m_primaryAttackTriggered = false;
         m_secondaryAttackTriggered = false;
 
-        playerInput();
+        playerInput(deltaTime);
 
         if (m_fireTimerPrimary > 0.0f) m_fireTimerPrimary -= deltaTime;
         if (m_fireTimerSecondary > 0.0f) m_fireTimerSecondary -= deltaTime;
@@ -80,7 +80,7 @@
         draw_sprite();
     }
 
-    void Player::playerInput()
+    void Player::playerInput(float deltaTime)
     {
         m_speed = IsKeyDown(KEY_LEFT_SHIFT) ? m_sprintSpeed : m_walkSpeed;
 
@@ -96,8 +96,8 @@
             moveDir.x /= len;
             moveDir.y /= len;
 
-            m_position.x += moveDir.x * m_speed;
-            m_position.y += moveDir.y * m_speed;
+            m_position.x += moveDir.x * m_speed * deltaTime;
+            m_position.y += moveDir.y * m_speed * deltaTime;
         }
 
         if (IsKeyPressed(KEY_Q))

@@ -18,13 +18,14 @@ Application::~Application()
 
 void Application::init()
 {
+    // m_saveService.clear_data(); if you want to start fresh 
     m_saveService.load_data();
 
     SetConfigFlags(FLAG_WINDOW_RESIZABLE);
 
     InitWindow(WIN_WIDTH, WIN_HEIGHT, "Mojo Picon: ZombieLand");
 
-    SetTargetFPS(60);
+    SetTargetFPS(500);
 }
 
 void Application::end()
