@@ -26,7 +26,7 @@ SaveService::SaveService(HUD* hud, Sheep* sheep)
             if (!stream.read(reinterpret_cast<char*>(&kills), sizeof(kills))) return;
             if (!stream.read(reinterpret_cast<char*>(&spawned), sizeof(spawned))) return;
 
-            // more
+            // add more
 
             GameManager::Instance().set_current_wave(wave);
             m_hud->set_zombies_killed(kills);
@@ -58,7 +58,7 @@ void SaveService::save_data()
         stream.write(reinterpret_cast<const char*>(&kills), sizeof(kills));
         stream.write(reinterpret_cast<const char*>(&spawned), sizeof(spawned));
 
-        // more
+        // add more
 
         const auto& positions = m_sheep->get_positions();
         size_t count = positions.size();
