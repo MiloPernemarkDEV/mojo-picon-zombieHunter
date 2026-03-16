@@ -32,7 +32,7 @@ public:
 
 	void update(float deltaTime) override;
 	void draw_sprite() override;
-	void move_sheep();
+	void move_sheep(float deltaTime);
 	void start() override;
 	Vector2 flee_direction(i32 i);
 	SheepStates state_machine(i32 index, float deltaTime);

@@ -18,7 +18,8 @@ Application::~Application()
 
 void Application::init()
 {
-    // m_saveService.clear_data(); if you want to start fresh 
+
+    // m_saveService.clear_data(); to start fresh
     m_saveService.load_data();
 
     SetConfigFlags(FLAG_WINDOW_RESIZABLE);

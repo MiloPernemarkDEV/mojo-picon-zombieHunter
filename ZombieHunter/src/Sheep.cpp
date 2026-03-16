@@ -6,7 +6,7 @@
 
 
 Sheep::Sheep()
-	: m_currentSheepCount(0), m_playerPos{0}, m_fleeSpeed(2), m_texture(0), m_wanderSpeed(1), m_hasSpawned(false)
+	: m_currentSheepCount(0), m_playerPos{0}, m_fleeSpeed(150), m_texture(0), m_wanderSpeed(70), m_hasSpawned(false)
 {
 }
 
@@ -17,7 +17,7 @@ Sheep::~Sheep()
 void Sheep::update(float deltaTime)
 {
     draw_sprite();
-	move_sheep();
+	move_sheep(deltaTime);
 }
 
 void Sheep::draw_sprite()
@@ -34,7 +34,7 @@ void Sheep::draw_sprite()
 	}
 }
 
-void Sheep::move_sheep()
+void Sheep::move_sheep(float deltaTime)
 {
     for (i32 i = 0; i < m_currentSheepCount; i++) {
         SheepStates state = state_machine(i, GetFrameTime());
@@ -42,16 +42,16 @@ void Sheep::move_sheep()
         switch (state) {
         case SheepStates::FLEEING:
             Vector2 fleeDir = flee_direction(i);
-            m_sheepPositions[i].x += fleeDir.x * m_fleeSpeed;
-            m_sheepPositions[i].y += fleeDir.y * m_fleeSpeed;
+            m_sheepPositions[i].x += fleeDir.x * m_fleeSpeed * deltaTime;
+            m_sheepPositions[i].y += fleeDir.y * m_fleeSpeed * deltaTime;
             break;
         case SheepStates::IDLE:
 
             break;
         case SheepStates::GRAZING:
 
-            m_sheepPositions[i].x += m_sheepDirections[i].x * m_wanderSpeed;
-            m_sheepPositions[i].y += m_sheepDirections[i].y * m_wanderSpeed;
+            m_sheepPositions[i].x += m_sheepDirections[i].x * m_wanderSpeed * deltaTime;
+            m_sheepPositions[i].y += m_sheepDirections[i].y * m_wanderSpeed * deltaTime;
             break;
         }
     }
