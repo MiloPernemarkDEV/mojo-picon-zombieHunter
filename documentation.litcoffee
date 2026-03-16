@@ -1,11 +1,18 @@
-# ZombieHunter 
+# Mojo Picon: Zombie Hunter
 
-**ZombieHunter** is a 2D top-down shooter prototype built in **C++** using the **raylib** graphics library. This project serves as a comprehensive demonstration of core game engineering principles, including state management, modular entity logic, and persistent data systems.
+### **Prerequisites**
+* A C++ compiler
+* Standard Template Library (STL)
 
----
+## Controls
 
-## Project Purpose
-The primary goal of ZombieHunter is to showcase a modular approach to game development. By maintaining a strict **separation of concerns**, the project avoids monolithic code. It utilizes distinct systems for gameplay orchestration, scene management, math utilities, and saving/loading to ensure the codebase remains scalable and maintainable.
+The game supports a dual-input scheme to accommodate different playstyles.
+
+| Action | Input |
+| :--- | :--- |
+| **Movement** | `W`, `A`, `S`, `D` or `Arrow Keys` |
+| **Active Attack** | `Left Click` (Mouse) |
+| **Dash** | `Left Shift` |
 
 ---
 
@@ -15,12 +22,12 @@ The primary goal of ZombieHunter is to showcase a modular approach to game devel
 * **Entry & Application:** Manages the program lifecycle. This includes raylib window initialization, high-level context setup, and the primary game loop orchestration.
 
 ### Game Management & Scene System
-* **SceneManager:** A centralized state manager that facilitates seamless switching between different game screens, such as the Main Menu, Gameplay, and HUD overlays.
-* **GameManager:** The primary logic coordinator. It handles entity initialization, health monitoring, and game-over conditions while delegating specific tasks to sub-systems.
+* **SceneManager:** A centralized state manager that calls all special functions.
+* **Singleton GameManager:** The primary gameplay coordinator handling things such as enemy waves. 
 
 ### Player & Gameplay Entities
 * **Player:** Manages complex input processing, movement physics, collision detection, and shooting behavior.
-* **SauceMaker:** A specialized base class for attack logic. It provides shared behavior for the player and other actors to ensure consistent combat mechanics across the board.
+* **SauceMaker:** A specialized base class similar to an entity class.
 
 ### Enemies & NPCs
 * **Zombie:** Features basic AI logic to track and move toward the player, alongside damage-dealing and hit-detection routines.
@@ -34,21 +41,8 @@ The primary goal of ZombieHunter is to showcase a modular approach to game devel
 * **HUD:** Decouples visual feedback from game logic. It handles the rendering of health bars, inventory slots, and real-time on-screen feedback.
 
 ### Saving & Loading
-* **SaveService:** Implements state persistence by abstracting the serialization of player progress, inventory contents, and game statistics to external files.
+* **SaveService:** Handles state persistence by leveraging the STL I/O library to serialize and deserialize data into a binary format.
 
 ### Utilities
 * **MojoPiconMath:** A custom math library for vector calculations, clamping, and geometric helpers to keep game code clean.
 * **SpriteFilePaths:** A centralized configuration file to manage asset paths, preventing hard-coded strings throughout the logic.
-
----
-
-## Code Architecture
-
-The project is built on a hierarchical flow designed for clarity:
-
-1.  **Application:** Initial setup and main loop.
-2.  **SceneManager:** Determines which "scene" is currently active.
-3.  **GameManager:** Orchestrates the active logic within the gameplay scene.
-4.  **Sub-Systems:** Player, Enemies, UI, and Inventory communicate via public interfaces rather than global variables.
-
-.
